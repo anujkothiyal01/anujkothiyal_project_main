@@ -1,0 +1,5 @@
+opencv-python
+fer
+ultralytics
+streamlit
+streamlit-webrtc
