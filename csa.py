@@ -116,8 +116,12 @@ if uploaded_file:
                         }
                         st.markdown(f"**Segment meaning:** {segment_explanations.get(segment, 'No description available.')}")
                     else:
-                        st.error(f"❌ Failed to get response: {response.status_code}")
-                        st.code(response.text)
+                        if response.status_code == 429:
+                            st.error("❌ Rate limit exceeded for free models on OpenRouter. Please wait for your daily quota to reset or add credits to your account to continue using the service.")
+                            st.info("Visit https://openrouter.ai/ to manage your account or obtain more credits.")
+                        else:
+                            st.error(f"❌ Failed to get response: {response.status_code}")
+                            st.code(response.text)
                 except requests.exceptions.Timeout:
                     st.error("❌ The request timed out. Please try again.")
                 except Exception as e:
