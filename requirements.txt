@@ -3,3 +3,4 @@ fer
 ultralytics
 streamlit
 streamlit-webrtc
+plotly
