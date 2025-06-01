@@ -11,7 +11,7 @@ st.title("🛒 REAL-TIME CUSTOMER SEGMENTATION IN RETAIL MARKET")
 st.markdown("Upload a customer image from a retail environment to analyze and segment the customer based on detected emotion. This demo uses OpenRouter's free multimodal AI to classify customer mood, which can be used for real-time segmentation and personalized marketing in retail analytics.")
 
 # Input your OpenRouter API key (hardcoded for demo)
-api_key = "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"
+api_key = "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"
 
 # File uploader
 uploaded_file = st.file_uploader("📷 Upload an image (JPG/PNG)", type=["jpg", "jpeg", "png"])
@@ -27,13 +27,13 @@ if uploaded_file:
     image_data_url = f"data:image/jpeg;base64,{image_base64}"
 
     if st.button("🧠 Segment Customer"):
+        headers = {
+            "Authorization": f"Bearer {api_key}" if api_key else "",
+            "Content-Type": "application/json"
+        }
         with st.spinner("Segmenting customer..."):
             # API setup
             url = "https://openrouter.ai/api/v1/chat/completions"
-            headers = {
-                "Authorization": f"Bearer {api_key}" if api_key else "",
-                "Content-Type": "application/json"
-            }
 
             payload = {
                 "model": "meta-llama/llama-4-maverick:free",
